@@ -1,17 +1,12 @@
 runOncePath("0:/lib/utils.ks").
-
 set spinTime to 2.
 
-// Enable mechjeb ascent module
-SET mj:ascent:ENABLED to TRUE.
+// Initiate launch
+passControlToMechjeb().
 stage.
 
 // Wait for first stage to actually begin
 WAIT UNTIL mj:info:STAGETIMECURRENT > 0.
-
-// Pass control to mechjeb
-UNLOCK STEERING.
-UNLOCK THROTTLE.
 
 // Wait until 3 seconds before the end of stage 1
 WAIT UNTIL mj:info:STAGETIMECURRENT < spinTime.
@@ -33,7 +28,5 @@ LOCK THROTTLE to 0.
 
 // Decouple parachute and science equipment for rentry.
 PRINT "Coasting to apoapsis...".
-WAIT UNTIL VERTICALSPEED < 0 and STAGE:READY.
-STAGE.
-WAIT 0.
+deployPayloadAtApo().
 
