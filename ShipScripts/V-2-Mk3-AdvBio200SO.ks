@@ -28,5 +28,9 @@ LOCK THROTTLE to 0.
 
 // Decouple parachute and science equipment for rentry.
 PRINT "Coasting to apoapsis...".
-deployPayloadAtApo().
+IF hasChute() {
+    waitUntilApoapsis().
+    stage.
+}
+
 

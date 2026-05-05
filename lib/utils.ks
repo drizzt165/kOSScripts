@@ -13,8 +13,17 @@ GLOBAL FUNCTION passControlToMechjeb {
     UNLOCK THROTTLE.
 }
 
-GLOBAL FUNCTION deployPayloadAtApo {
+GLOBAL FUNCTION waitUntilApoapsis {
     WAIT UNTIL SHIP:VERTICALSPEED < 0 and STAGE:READY.
-    stage.
-    wait 0.
+}
+
+GLOBAL FUNCTION hasChute {
+    // Wait for apo to deploy payload and arm parachute.
+    FOR PART IN SHIP:PARTS {
+        // Check for real chute mod part
+        IF PART:NAME:CONTAINS("RC.Stack") {
+            RETURN True.
+        }
+    }
+    RETURN False.
 }
