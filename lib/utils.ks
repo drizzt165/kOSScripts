@@ -27,3 +27,7 @@ GLOBAL FUNCTION hasChute {
     }
     RETURN False.
 }
+
+GLOBAL FUNCTION getPitch {
+    RETURN (90 - vectorAngle(SHIP:FACING:forevector, UP:forevector)).
+}
