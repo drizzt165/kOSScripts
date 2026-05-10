@@ -31,3 +31,7 @@ GLOBAL FUNCTION hasChute {
 GLOBAL FUNCTION getPitch {
     RETURN (90 - vectorAngle(SHIP:FACING:forevector, UP:forevector)).
 }
+
+GLOBAL FUNCTION getManeuverError {
+    RETURN vectorAngle(SHIP:FACING:forevector, NEXTNODE:burnvector).
+}
